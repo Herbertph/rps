@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+
+
+<style>
+    #wrapper {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        background-color:azure;
+        border-style: solid;
+        
+    }
+
+    img {
+      display: none;
+      width: 20%;
+      margin: 0 auto;
+      margin-bottom: 5%;
+      padding: 10px;
+      border-style: solid;
+      background-color: white;
+    }
+</style>
+
+<body>
+    <div id="wrapper">
+        <h1>Rock Paper Scissors</h1>
+        <p>Choose your destiny:</p>
+        <button id="rockbtn">Rock</button>
+        <button id="paperbtn">Paper</button>
+        <button id="scissorsbtn">Scissors</button>
+        <h2 id="result"></h2>
+        <img id="rockImg" src="rock.png">
+        <img id="scissorsImg" src="scissors.png">
+        <img id="paperImg" src="paper.jpg">
+    </div>
+
+    <script>
+      //Function that will run the game //
+      function rockPaperScissors(playerSelection) {
+        let options = ["rock", "paper", "scissors"];
+      //Randomly generate an option for the computer
+        let computerSelection = options[Math.floor(Math.random() * options.length)];
+
+        if (playerSelection === computerSelection) {
+          return "It's a tie!";
+        }
+
+        if (
+          (playerSelection === "rock" && computerSelection === "scissors") ||
+          (playerSelection === "paper" && computerSelection === "rock") ||
+          (playerSelection === "scissors" && computerSelection === "paper")
+        ) {
+          return `You win! ${playerSelection} beats ${computerSelection}.`;
+        }
+
+        return `You lose! ${computerSelection} beats ${playerSelection}.`;
+      }
+
+      let rockImg = document.getElementById("rockImg");
+      let scissorsImg = document.getElementById("scissorsImg");
+      let paperImg = document.getElementById("paperImg");
+      let rockBtn = document.getElementById("rockbtn");
+      let paperBtn = document.getElementById("paperbtn");
+      let scissorsBtn = document.getElementById("scissorsbtn");
+      let result = document.getElementById("result");
+
+      rockBtn.addEventListener("click", () => {
+        setTimeout(() => {
+        rockImg.style.display = "block";
+        scissorsImg.style.display = "none";
+        paperImg.style.display = "none";
+        result.textContent = rockPaperScissors("rock");
+        }, 500); 
+      });
+
+      paperBtn.addEventListener("click", () => {
+        setTimeout(() => {
+        rockImg.style.display = "none";
+        scissorsImg.style.display = "none";
+        paperImg.style.display = "block";
+        //Set "paper" to the playerSelection
+        result.textContent = rockPaperScissors("paper");
+        }, 500);
+      });
+
+      scissorsBtn.addEventListener("click", () => {
+        setTimeout(() => {
+        rockImg.style.display = "none";
+        scissorsImg.style.display = "block";
+        paperImg.style.display = "none";
+        //Set "scissors" to the playerSelection
+        result.textContent = rockPaperScissors("scissors");
+        }, 500);
+      });
+
+    </script>
+  </body>
+</html>
